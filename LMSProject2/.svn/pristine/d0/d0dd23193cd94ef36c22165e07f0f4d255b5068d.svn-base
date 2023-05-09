@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.ConsultMapper">
+	
+	<select id="getProInfoList" resultType="professorVO">
+		select
+		     PRO_ID, PRO_NAME_KO, PRO_MAJOR, PRO_LAB_TEL, PRO_LAB_NUM
+		from professor
+		where dept_code = #{deptCode}
+	</select>
+
+	<select id="registerList" resultType="consultVO">
+		select
+			con.cons_num, pro.pro_name_ko, con.cons_date, con.cons_start, con.cons_end, con.cons_req_rsn, 
+			con.cons_status, con.cons_obj_rsn, con.cons_interview, con.week_code
+		from consult con, professor pro
+		where pro.pro_id = con.pro_id
+		and con.stu_id = #{stuId}
+	</select>
+	
+	<delete id="cancelConsult" parameterType="int">
+		delete from consult
+		where cons_num = #{consNum}
+	</delete>
+
+</mapper>

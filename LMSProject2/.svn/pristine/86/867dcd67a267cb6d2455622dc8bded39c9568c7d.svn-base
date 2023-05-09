@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.mapper.PortletMapper">
+
+	<!-- 포틀릿 설정) 포틀릿 보여주기 -->
+	<select id="settingPortletSelect" parameterType="String" resultType="portletVO"> 
+		select po_cate_ie, stu_id, po_yn, po_x, po_y, po_w,
+			(case when po_h = 2 then 1 
+				  when po_h = 4 then 2
+				  when po_h = 8 then 3
+				  else 4 end ) as po_h
+		from portlet
+		where stu_id = #{stu_id} and po_yn = 1
+	</select>
+	
+	
+
+</mapper>

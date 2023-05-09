@@ -1,0 +1,83 @@
+package kr.or.ddit.user.service.impl;
+
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.common.ServiceResult;
+import kr.or.ddit.mapper.UserMapper;
+import kr.or.ddit.user.service.IUserService;
+import kr.or.ddit.user.vo.EmployeeVO;
+import kr.or.ddit.user.vo.ProfessorVO;
+import kr.or.ddit.user.vo.StudentVO;
+import kr.or.ddit.user.vo.UserVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+public class UserServiceImpl implements IUserService {
+	
+	@Autowired
+	private UserMapper userMapper;
+	
+	@Override
+	public ServiceResult userCheck(UserVO userVO, HttpSession session) {
+		ServiceResult result = null;
+		// 사용자 등록 여부 체크
+		UserVO user = userMapper.userCheck(userVO);
+//		log.info("user: "+ user.toString());
+		
+		if(user != null) {	// 사용자 정보 존재했을 경우
+			if(userVO.getUserType().equals("STU")) {	// 학생일 때
+				StudentVO student = userMapper.getStudent(userVO);
+				if(student != null) {
+					session.setAttribute("userInfo", student);
+					result = ServiceResult.OK;
+				}else {
+					result = ServiceResult.FAILED;
+				}
+				
+				return result;
+			}
+			if(userVO.getUserType().equals("PRO")) {	// 교수일 때
+				ProfessorVO professor = userMapper.getProfessor(userVO);
+				if(professor != null) {
+					session.setAttribute("userInfo", professor);
+					result = ServiceResult.OK;
+				}else {
+					result = ServiceResult.FAILED;
+				}
+				
+				return result;
+			}
+			if(userVO.getUserType().equals("EMP")) {	// 직원일 때
+				EmployeeVO employee = userMapper.getEmployee(userVO);
+				if(employee != null) {
+					session.setAttribute("userInfo", employee);
+					result = ServiceResult.OK;
+				}else {
+					result = ServiceResult.FAILED;
+				}
+				
+				return result;
+			}
+		}else {
+			result = ServiceResult.FAILED;
+		}
+		return result;
+	}
+
+	@Override
+	public String getId(Map<String, Object> findMap) {
+		ServiceResult result = null;
+		String userId = userMapper.getId(findMap);
+		
+		return userId;
+	}
+
+	
+
+}

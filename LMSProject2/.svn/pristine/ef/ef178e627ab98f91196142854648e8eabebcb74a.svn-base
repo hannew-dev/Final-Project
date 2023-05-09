@@ -1,0 +1,12 @@
+package kr.or.ddit.portlet.service;
+
+import java.util.List;
+
+import kr.or.ddit.portlet.vo.PortletVO;
+import kr.or.ddit.user.vo.UserVO;
+
+public interface PortletService {
+
+	public List<PortletVO> portletSelect(UserVO userVO);
+
+}

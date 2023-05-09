@@ -1,0 +1,355 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- 상담 신청 페이지  -->
+<%-- ${userInfo } --%>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span style="font-size:18px; color: #f96d00">|</span>
+          교수목록
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+		<div class="table-responsive">
+	        <table class="table table-hover text-center"> 
+				<thead>
+	                <tr>
+	                  <th>교수명</th>
+	                  <th>전공</th>
+	                  <th>연구실호수</th>
+	                  <th>연구실연락처</th>
+	                </tr>
+	              </thead>
+	              <tbody>
+	              	<c:forEach items="${proInfoList }" var="proInfo" >
+	              		<tr>
+			                <input type="hidden" value="${proInfo.proId }"/>
+	              			<td>${proInfo.proNameKo }</td>
+	              			<td>${proInfo.proMajor }</td>
+	              			<td>${proInfo.proLabNum }</td>
+	              			<td>${proInfo.proLabTel }</td>
+	              		</tr>
+	              	</c:forEach>
+	                	
+				  </tbody>	        
+	        </table>
+		</div>       
+				
+				
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <span style="font-size:18px; color: #f96d00">|</span>
+          교수 시간표
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table table-responsive">
+          <div class="row">
+          </div>
+          <div>
+            <table class="table table-bordered text-center" id="timeTbl">
+              <thead>
+                <tr id="datTr">
+                  <th style="width:15%;"></th>
+                  <th>월</th>
+                  <th>화</th>
+                  <th>수</th>
+                  <th>목</th>
+                  <th>금</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>09:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>10:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>11:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>12:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>13:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>14:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>15:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>16:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>17:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>18:00</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- 모달 시작 -->
+ <!-- Modal -->
+ <div class="modal fade" id="consultRegister">
+     <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <h3 class="modal-title">
+                 	  상담 신청
+                 </h3>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal">
+                 </button>
+             </div>
+			 <!-- modal-body 시작 -->
+             <div class="modal-body">
+                <div class="card" style="border:none;">
+                    <div class="card-body">
+                        <div class="basic-form">
+                            <form>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">교수명</label>
+                                        <input type="text" class="form-control" placeholder="교수명" name="proId">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label class="form-label">구분선택</label>
+                                        <div class="dropdown bootstrap-select default-select form-control wide">
+                                        <select name="consInterview" id="interview" class="default-select form-control wide">
+                                          <option>선택</option>
+                                          <option value="Y" id="">대면</option>
+                                          <option value="N" id="">비대면</option>
+                                      </select></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                  <div class="mb-3 col-md-6">
+                                      <label class="form-label">상담일자</label>
+                                      <input type="text" class="form-control" placeholder="상담일자" name="consDate">
+                                  </div>
+                                  <div class="mb-3 col-md-6">
+                                    <label>상담시간</label>
+                                    <div class="row">
+                                      <div class="col-md-5" style="padding-right:0;">
+                                        <input type="text" class="form-control" placeholder="시작시간" id="start" name="consStart">
+                                      </div>
+                                      <div class="col-md-1 text-center" style="margin-top:10px;">
+                                        ~
+                                      </div>
+                                      <div class="col-md-5" style="padding-right:0;">
+                                        <input type="text" class="form-control" placeholder="종료시간" id="end" name="consEnd">
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label class="form-label">상담사유</label>
+                                        <textarea name="consReqRsn" class="form-txtarea form-control" cols="8" rows="10"></textarea>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+  				</div>      
+  				<!-- card 끝 -->
+             </div>
+             <!-- modal body 끝 -->
+
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-primary">예약</button>
+                 <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">닫기</button>
+             </div>
+         </div>
+         <!-- modal content 끝 -->
+     </div>
+ </div>
+
+<script>
+
+$(function(){
+	let WEEK_CODE = ["", "MON", "TUE", "WED", "THU", "FRI"];
+	let TIME_CODE = ["H09", "H10", "H11", "H12", "H13", "H14", "H15", "H16", "H17", "H18"];
+	
+	$("#timeTbl td").attr("data-bs-toggle","modal").attr("data-bs-target","#consultRegister");
+	
+	$("#timeTbl td").on("click", function(){
+		let index = $(this).index();
+		console.log("요일 코드:", WEEK_CODE[$(this).index()]);
+		
+		let startTime = TIME_CODE[$(this).parent().index()].substr(1) + ":00";
+		console.log(startTime);
+		let endTime = TIME_CODE[$(this).parent().index() + 1].substr(1) + ":00";
+		console.log(endTime);
+		let day = $("#timeTbl").find(`th:eq(\${index})`).text();
+
+	    $("#start").val(startTime);
+	    $("#end").val(endTime);
+	    $('input[name="consDate"]').val(day);
+
+	});
+	
+	// select 박스 값 가져오기
+	$("#interview").on("change", function(){
+		const selectVal = $(this).val();
+		console.log(selectVal)
+	});
+	
+	
+	// tr태그에 오늘 날짜를 기준으로 5일치 일수를 적용한다.
+	$("#datTr th").map(function(idx, value){
+		var val = selectWeek();
+		let dayCode = ["", "월", "화", "수", "목", "금"];
+		if(idx > 0){
+			value.innerHTML = val[idx] + "(" +dayCode[idx] + ")";
+		}
+		
+	});
+
+	function selectWeek(){
+		// 결과
+		var value = [];
+	 
+		// 오늘의 요일 및 날짜
+		var currentDay = new Date();  
+		var theYear = currentDay.getFullYear();
+		var theMonth = Number(currentDay.getMonth()) + 1;
+		var theDate  = Number(currentDay.getDate());
+		var theDay  = Number(currentDay.getDay());
+	 
+		// 날짜 업데이트
+		var newYear, newMonth, newDate;
+	 
+		// 이번달 마지막날
+		var nowLast = new Date ();
+			nowLast.setMonth(nowLast.getMonth() + 1);
+		var nowLastDay = new Date( nowLast.getYear(), nowLast.getMonth(), "");
+			nowLastDay = nowLastDay.getDate();
+	 
+		var lastDay; // 이전 달 마지막날 파악
+	 
+		for (var i = -theDay; i < (theDay-7)*-1; i++){
+	 
+		    newYear = theYear;
+		    newDate = theDate;
+		    newMonth = theMonth;
+	 
+			//첫주 일때
+			if(theDate+i < 1){
+		        
+				if(theMonth == 1){ // 1월 첫째주 일때
+					lastDay = new Date(Number(currentDay.getFullYear())-1, Number(currentDay.getMonth())+12, "");
+				} else { // 1월 첫째주가 아닐때
+					lastDay = new Date(currentDay.getFullYear(), currentDay.getMonth(), "");
+				}
+	 
+				newYear = lastDay.getFullYear();
+				newMonth = lastDay.getMonth();
+				newDate = Number(lastDay.getDate())+i;
+	 
+			//마지막주 일때
+			} else if( theDate+i > nowLastDay) {
+	 
+				if(theMonth == 12){ // 12월 마지막주 일때
+					newYear = Number(theYear) + 1;
+				}
+	 
+				newMonth = Number(theMonth) + 1;
+				newDate = i;
+			}else{
+			    newDate = (newDate + i);
+			}
+	 
+		    
+		    // yyyy-mm-dd 형식으로
+		    if(String(newDate).length < 2){
+		        newDate = "0" + String(newDate);
+		    }
+		    if(String(newMonth).length < 2){
+		        newMonth = "0" + String(newMonth);
+		    }
+	 
+			//이번주 7일의 날짜를 value에 담는다.
+			value.push(newMonth + "/" + newDate);
+		}
+	 
+		return value;
+	}	
+	
+});
+</script>

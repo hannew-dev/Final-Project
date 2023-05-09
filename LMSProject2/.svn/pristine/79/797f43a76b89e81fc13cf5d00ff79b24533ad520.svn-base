@@ -1,0 +1,22 @@
+package kr.or.ddit.mapper;
+
+import java.util.Map;
+
+import kr.or.ddit.user.vo.EmployeeVO;
+import kr.or.ddit.user.vo.ProfessorVO;
+import kr.or.ddit.user.vo.StudentVO;
+import kr.or.ddit.user.vo.UserVO;
+
+public interface UserMapper {
+
+	public UserVO userCheck(UserVO userVO);
+
+	public StudentVO getStudent(UserVO userVO);
+
+	public ProfessorVO getProfessor(UserVO userVO);
+
+	public EmployeeVO getEmployee(UserVO userVO);
+
+	public String getId(Map<String, Object> findMap);
+	
+}

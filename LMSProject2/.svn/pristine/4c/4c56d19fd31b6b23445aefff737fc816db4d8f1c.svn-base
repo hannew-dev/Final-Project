@@ -1,0 +1,26 @@
+package kr.or.ddit.portlet.service.impl;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.mapper.PortletMapper;
+import kr.or.ddit.portlet.service.PortletService;
+import kr.or.ddit.portlet.vo.PortletVO;
+import kr.or.ddit.user.vo.UserVO;
+
+@Service
+public class PortletServiceImpl implements PortletService{
+	
+	@Inject
+	private PortletMapper portletMapper;
+
+	// 유저별 포틀릿 화면 보여주기
+	@Override
+	public List<PortletVO> portletSelect(UserVO userVO) {
+		return portletMapper.portletSelect(userVO);
+	}
+
+}
